@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel='stylesheet' type='text/css' href='style.css'>
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<!-- Navigation -->
+			<nav>
+				<div class="topnav">
+					<ul class="nav">
+						<strong>
+							<a href="About Us.html">&nbsp ABOUT US &nbsp</a>
+							<a href="Locations.html">&nbsp LOCATION &nbsp</a>
+							<a href="Main.html">&nbsp EXPLORE </a> </strong>
+						<h2>
+							THE CHILDREN'S GALLERY
+						</h2>
+					</ul>
+				</div>
+				<div class="locationswrapper">
+					<div id="vue-app">
+						<div class="locationContainer">
+							<div class="searchBarDiv">
+								<input type="text" v-model="search" placeholder="Search locations" class="searchBar" />
+							</div>
+							<div v-for="location in filteredLocations" class="locationDiv">
+								<h1>{{ location.name }}</h1>
+								<p class="locationDetails">{{ location.address }} <br /> {{ location.contact }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</body>
+	<script>
+		const app = Vue.createApp({
+			data() {
+				return {
+					search: '',
+					locations: [{
+							name: 'Location 1',
+							address: 'Address 1',
+							contact: 'Contact 1'
+						},
+						{
+							name: 'Location 2',
+							address: 'Address 2',
+							contact: 'Contact 2'
+						},
+						// Add more locations as needed
+					]
+				};
+			},
+			computed: {
+				filteredLocations() {
+					return this.locations.filter(location => {
+						return location.name.toLowerCase().includes(this.search.toLowerCase());
+					});
+				}
+			}
+		});
+
+		app.mount('#vue-app');
+	</script>
+
+</html>
